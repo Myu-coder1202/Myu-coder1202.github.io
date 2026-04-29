@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿鱼 | 产品经理 · 5年AI/B端SaaS经验</title>
+    <meta name="description" content="阿鱼 - 资深产品经理，5年B端SaaS、智能硬件、AI产品经验">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0a0a0a',
+                        coal: '#161616',
+                        graphite: '#1f1f1f',
+                        bone: '#f6f3ec',
+                        cream: '#faf7f0',
+                        accent: '#ffd84d',
+                        accentDeep: '#ffb800',
+                        coral: '#ff6b4a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'sans-serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            html { scroll-behavior: smooth; }
+            body { font-feature-settings: "ss01", "cv11"; -webkit-font-smoothing: antialiased; }
+        }
+        @layer utilities {
+            .glass {
+                backdrop-filter: saturate(180%) blur(20px);
+                -webkit-backdrop-filter: saturate(180%) blur(20px);
+                background-color: rgba(10, 10, 10, 0.72);
+            }
+            .glass-light {
+                backdrop-filter: saturate(180%) blur(20px);
+                -webkit-backdrop-filter: saturate(180%) blur(20px);
+                background-color: rgba(246, 243, 236, 0.82);
+            }
+            .marker {
+                background-image: linear-gradient(transparent 60%, #ffd84d 60%);
+                padding: 0 .15em;
+            }
+            .text-stroke {
+                -webkit-text-stroke: 1.5px #f6f3ec;
+                color: transparent;
+            }
+            .card-tilt {
+                transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease;
+            }
+            .card-tilt:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 30px 60px -20px rgba(0,0,0,.35);
+            }
+            .scroll-marquee {
+                animation: marquee 30s linear infinite;
+            }
+            @keyframes marquee {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+            .grid-bg {
+                background-image:
+                    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+                background-size: 56px 56px;
+            }
+            .reveal {
+                opacity: 0;
+                transform: translateY(24px);
+                transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
+            }
+            .reveal.in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .line-clamp-2 {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .line-clamp-3 {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body class="bg-bone text-ink font-sans">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
+            <a href="#top" class="flex items-center gap-2 group">
+                <span class="w-8 h-8 rounded-full bg-ink text-accent flex items-center justify-center font-serif italic font-bold text-lg group-hover:bg-accent group-hover:text-ink transition-colors">阿</span>
+                <span class="font-semibold tracking-tight text-ink">阿鱼 · Yu</span>
+            </a>
+            <div class="hidden md:flex items-center gap-1 bg-ink/5 rounded-full px-2 py-1.5 border border-ink/10">
+                <a href="#about" class="px-4 py-1.5 text-sm font-medium text-ink/70 hover:text-ink hover:bg-white rounded-full transition-all">关于</a>
+                <a href="#experience" class="px-4 py-1.5 text-sm font-medium text-ink/70 hover:text-ink hover:bg-white rounded-full transition-all">经历</a>
+                <a href="#projects" class="px-4 py-1.5 text-sm font-medium text-ink/70 hover:text-ink hover:bg-white rounded-full transition-all">项目</a>
+                <a href="#testimonials" class="px-4 py-1.5 text-sm font-medium text-ink/70 hover:text-ink hover:bg-white rounded-full transition-all">能力</a>
+                <a href="#contact" class="px-4 py-1.5 text-sm font-medium text-ink/70 hover:text-ink hover:bg-white rounded-full transition-all">联系</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-bone rounded-full text-sm font-semibold hover:bg-graphite transition-colors">
+                    <span>联系我</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                <button id="menu-toggle" class="md:hidden w-10 h-10 rounded-full bg-ink text-bone flex items-center justify-center" aria-label="打开菜单">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-cream border-t border-ink/10">
+            <div class="px-6 py-4 space-y-1">
+                <a href="#about" class="block py-2 text-ink/80 font-medium">关于</a>
+                <a href="#experience" class="block py-2 text-ink/80 font-medium">经历</a>
+                <a href="#projects" class="block py-2 text-ink/80 font-medium">项目</a>
+                <a href="#testimonials" class="block py-2 text-ink/80 font-medium">能力</a>
+                <a href="#contact" class="block py-2 text-ink/80 font-medium">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="top" class="relative bg-ink text-bone overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28">
+        <div class="absolute inset-0 grid-bg opacity-60"></div>
+        <div class="absolute -top-20 -right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 -left-20 w-80 h-80 bg-coral/10 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-10">
+            <!-- Top Tag -->
+            <div class="flex items-center gap-3 mb-10">
+                <span class="flex h-2 w-2 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                </span>
+                <span class="text-xs uppercase tracking-[0.2em] text-bone/70 font-medium">Open to opportunities · 求职中</span>
+            </div>
+
+            <!-- Hero Title -->
+            <h1 class="font-serif text-[44px] sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight font-bold mb-8">
+                做一款产品，<br>
+                <span class="italic text-accent">解决</span>一个问题。<br>
+                <span class="text-stroke">不靠喊口号。</span>
+            </h1>
+
+            <!-- Subtitle Two-column -->
+            <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-end mt-12">
+                <div class="md:col-span-7">
+                    <p class="text-lg md:text-xl text-bone/80 leading-relaxed max-w-2xl">
+                        我是 <span class="text-bone font-semibold">阿鱼</span>，一位拥有 <span class="marker text-ink font-bold">5 年经验</span>的产品经理。专注 B 端 SaaS、智能硬件与 AI 产品，把模糊需求拆成可交付的方案，把数据变成下一次迭代的依据。
+                    </p>
+                </div>
+                <div class="md:col-span-5 md:justify-self-end">
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#projects" class="inline-flex items-center gap-2 px-6 py-4 bg-accent text-ink rounded-full font-bold hover:bg-accentDeep transition-all hover:translate-y-[-2px]">
+                            查看项目
+                            <i class="fas fa-arrow-down text-xs"></i>
+                        </a>
+                        <a href="#contact" class="inline-flex items-center gap-2 px-6 py-4 bg-transparent border border-bone/30 text-bone rounded-full font-semibold hover:bg-bone hover:text-ink transition-all">
+                            <i class="fas fa-paper-plane text-xs"></i>
+                            发送邮件
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Stats -->
+            <div class="mt-20 md:mt-28 grid grid-cols-2 md:grid-cols-4 gap-px bg-bone/10 rounded-3xl overflow-hidden border border-bone/10">
+                <div class="bg-ink p-6 md:p-8">
+                    <div class="text-4xl md:text-5xl font-serif italic font-bold text-accent">5<span class="text-2xl">+</span></div>
+                    <div class="text-bone/60 text-sm mt-2">年产品经验</div>
+                </div>
+                <div class="bg-ink p-6 md:p-8">
+                    <div class="text-4xl md:text-5xl font-serif italic font-bold text-accent">15<span class="text-2xl">+</span></div>
+                    <div class="text-bone/60 text-sm mt-2">交付项目</div>
+                </div>
+                <div class="bg-ink p-6 md:p-8">
+                    <div class="text-4xl md:text-5xl font-serif italic font-bold text-accent">3</div>
+                    <div class="text-bone/60 text-sm mt-2">就职公司</div>
+                </div>
+                <div class="bg-ink p-6 md:p-8">
+                    <div class="text-4xl md:text-5xl font-serif italic font-bold text-accent">B+C</div>
+                    <div class="text-bone/60 text-sm mt-2">业务覆盖</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Marquee -->
+    <section class="bg-accent text-ink py-5 overflow-hidden border-y-2 border-ink">
+        <div class="flex whitespace-nowrap scroll-marquee">
+            <div class="flex items-center gap-10 px-5 text-2xl md:text-3xl font-serif italic font-bold">
+                <span>需求洞察</span><i class="fas fa-star text-base"></i>
+                <span>原型设计</span><i class="fas fa-star text-base"></i>
+                <span>数据驱动</span><i class="fas fa-star text-base"></i>
+                <span>跨部门协作</span><i class="fas fa-star text-base"></i>
+                <span>0-1 落地</span><i class="fas fa-star text-base"></i>
+                <span>AI 产品</span><i class="fas fa-star text-base"></i>
+                <span>B 端 SaaS</span><i class="fas fa-star text-base"></i>
+                <span>智能硬件</span><i class="fas fa-star text-base"></i>
+            </div>
+            <div class="flex items-center gap-10 px-5 text-2xl md:text-3xl font-serif italic font-bold" aria-hidden="true">
+                <span>需求洞察</span><i class="fas fa-star text-base"></i>
+                <span>原型设计</span><i class="fas fa-star text-base"></i>
+                <span>数据驱动</span><i class="fas fa-star text-base"></i>
+                <span>跨部门协作</span><i class="fas fa-star text-base"></i>
+                <span>0-1 落地</span><i class="fas fa-star text-base"></i>
+                <span>AI 产品</span><i class="fas fa-star text-base"></i>
+                <span>B 端 SaaS</span><i class="fas fa-star text-base"></i>
+                <span>智能硬件</span><i class="fas fa-star text-base"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-32 px-6 lg:px-10 bg-cream">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-20">
+                <!-- Left: Portrait -->
+                <div class="lg:col-span-5 reveal">
+                    <div class="relative">
+                        <div class="absolute -inset-3 bg-accent rounded-3xl rotate-2"></div>
+                        <div class="relative aspect-[4/5] rounded-3xl overflow-hidden bg-graphite">
+                            <img src="https://picsum.photos/800/1000?random=11" alt="阿鱼" class="w-full h-full object-cover">
+                            <div class="absolute bottom-4 left-4 right-4 glass rounded-2xl px-4 py-3 flex items-center justify-between">
+                                <div>
+                                    <div class="text-bone font-semibold">阿鱼 · Yu</div>
+                                    <div class="text-bone/60 text-xs">Product Manager · 广州 / 成都</div>
+                                </div>
+                                <span class="px-3 py-1 bg-accent text-ink text-xs rounded-full font-bold">在线</span>
+                            </div>
+                        </div>
+                        <!-- Floating tag -->
+                        <div class="absolute -top-4 -right-4 bg-ink text-bone rounded-2xl px-4 py-3 shadow-xl rotate-6 hidden md:block">
+                            <div class="text-xs text-bone/60">5+ years</div>
+                            <div class="font-bold">PM @ B&C</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right: Content -->
+                <div class="lg:col-span-7 reveal">
+                    <div class="text-xs uppercase tracking-[0.3em] text-ink/50 mb-6 flex items-center gap-3">
+                        <span class="w-8 h-px bg-ink/40"></span>
+                        关于我 · About
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8">
+                        一位<span class="italic text-ink/40">「克制」</span>的<br>
+                        产品经理。
+                    </h2>
+                    <div class="space-y-5 text-ink/70 text-lg leading-relaxed mb-10">
+                        <p>计算机科班出身，做过 B 端 SaaS、做过 C 端工具、也带过智能硬件产品落地。我相信好产品来自三件事：<span class="font-semibold text-ink">真实的用户场景</span>、<span class="font-semibold text-ink">清晰的优先级</span>，以及<span class="font-semibold text-ink">可量化的迭代</span>。</p>
+                        <p>过去 5 年，我把"听上去都重要"的需求清单，反复砍到只剩"必须做"的那几条；把"看起来很热闹"的功能，做成留得住人的工作流。</p>
+                    </div>
+
+                    <!-- Info Grid -->
+                    <div class="grid grid-cols-2 gap-px bg-ink/10 rounded-2xl overflow-hidden border border-ink/10">
+                        <div class="bg-cream px-5 py-4">
+                            <div class="text-xs text-ink/50 mb-1">姓名</div>
+                            <div class="font-semibold text-ink">阿鱼</div>
+                        </div>
+                        <div class="bg-cream px-5 py-4">
+                            <div class="text-xs text-ink/50 mb-1">年龄 / 性别</div>
+                            <div class="font-semibold text-ink">29 · 女</div>
+                        </div>
+                        <div class="bg-cream px-5 py-4">
+                            <div class="text-xs text-ink/50 mb-1">学历</div>
+                            <div class="font-semibold text-ink">本科 · 计算机科学与技术</div>
+                        </div>
+                        <div class="bg-cream px-5 py-4">
+                            <div class="text-xs text-ink/50 mb-1">毕业院校</div>
+                            <div class="font-semibold text-ink">四川工商学院</div>
+                        </div>
+                        <div class="bg-cream px-5 py-4">
+                            <div class="text-xs text-ink/50 mb-1">求职意向</div>
+                            <div class="font-semibold text-ink">产品经理</div>
+                        </div>
+                        <div class="bg-cream px-5 py-4">
+                            <div class="text-xs text-ink/50 mb-1">所在城市</div>
+                            <div class="font-semibold text-ink">广州 / 成都</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-20 md:py-28 px-6 lg:px-10 bg-bone">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 reveal">
+                <div>
+                    <div class="text-xs uppercase tracking-[0.3em] text-ink/50 mb-4 flex items-center gap-3">
+                        <span class="w-8 h-px bg-ink/40"></span>
+                        擅长领域 · Capabilities
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold leading-tight">
+                        当我接到一个需求，<br>
+                        <span class="italic">这些事会同时发生。</span>
+                    </h2>
+                </div>
+                <p class="md:max-w-md text-ink/60 text-base">
+                    从用户访谈到上线复盘，每个阶段都不外包给"差不多"。下面是我在产品流程里最常用、也最被验证的能力。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="bg-ink text-bone rounded-3xl p-7 card-tilt">
+                    <div class="w-12 h-12 rounded-2xl bg-accent text-ink flex items-center justify-center mb-6">
+                        <i class="fas fa-magnifying-glass text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">需求洞察</h3>
+                    <p class="text-bone/70 leading-relaxed">用户访谈、行为埋点、竞品拆解三件套，把"感觉用户想要"翻译成"数据看得到的痛点"。</p>
+                </div>
+                <div class="bg-cream border border-ink/10 rounded-3xl p-7 card-tilt">
+                    <div class="w-12 h-12 rounded-2xl bg-ink text-accent flex items-center justify-center mb-6">
+                        <i class="fas fa-pen-ruler text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">原型与设计</h3>
+                    <p class="text-ink/60 leading-relaxed">Figma / Axure 都能干。拿一稿低保真去验证，再迭代到能让开发不打架的高保真。</p>
+                </div>
+                <div class="bg-accent text-ink rounded-3xl p-7 card-tilt">
+                    <div class="w-12 h-12 rounded-2xl bg-ink text-accent flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">数据驱动</h3>
+                    <p class="text-ink/70 leading-relaxed">SQL 自取数，看得懂留存、转化、漏斗，把每一次迭代都钉在可量化的指标上。</p>
+                </div>
+                <div class="bg-cream border border-ink/10 rounded-3xl p-7 card-tilt">
+                    <div class="w-12 h-12 rounded-2xl bg-coral text-bone flex items-center justify-center mb-6">
+                        <i class="fas fa-people-group text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">跨团队协作</h3>
+                    <p class="text-ink/60 leading-relaxed">研发、设计、运营、销售之间反复横跳，把诉求翻译成大家听得懂的同一句话。</p>
+                </div>
+                <div class="bg-cream border border-ink/10 rounded-3xl p-7 card-tilt">
+                    <div class="w-12 h-12 rounded-2xl bg-ink text-bone flex items-center justify-center mb-6">
+                        <i class="fas fa-rocket text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">0 - 1 落地</h3>
+                    <p class="text-ink/60 leading-relaxed">从空白文档到正式上线，主导过 6+ 个项目。知道哪一刀该砍，哪一根针不能省。</p>
+                </div>
+                <div class="bg-ink text-bone rounded-3xl p-7 card-tilt">
+                    <div class="w-12 h-12 rounded-2xl bg-bone text-ink flex items-center justify-center mb-6">
+                        <i class="fas fa-microchip text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">AI / 智能硬件</h3>
+                    <p class="text-bone/70 leading-relaxed">人脸识别、边缘计算盒、智能客服等 AI 落地经验，懂技术边界，不画饼。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 md:py-32 px-6 lg:px-10 bg-ink text-bone relative overflow-hidden">
+        <div class="absolute inset-0 grid-bg opacity-40"></div>
+        <div class="relative max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-12 gap-12 mb-16 reveal">
+                <div class="lg:col-span-5">
+                    <div class="text-xs uppercase tracking-[0.3em] text-bone/50 mb-4 flex items-center gap-3">
+                        <span class="w-8 h-px bg-bone/40"></span>
+                        工作经历 · Experience
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1]">
+                        三家公司，<br>
+                        <span class="italic text-accent">一条线</span>。
+                    </h2>
+                </div>
+                <div class="lg:col-span-7 lg:pl-12 lg:border-l lg:border-bone/10">
+                    <p class="text-bone/70 text-lg leading-relaxed">
+                        从产品助理一路做到独当一面，从 C 端工具走到 B 端 SaaS、再到 AI 智能硬件。每一段都不是"待过"，而是"做完一件事再走"。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="space-y-5">
+                <!-- Job 1 -->
+                <article class="group bg-graphite border border-bone/10 rounded-3xl p-6 md:p-10 hover:bg-coal hover:border-accent/30 transition-all">
+                    <div class="grid md:grid-cols-12 gap-6 md:gap-10">
+                        <div class="md:col-span-3">
+                            <div class="text-bone/50 text-sm font-mono mb-2">2024.08 — 2026.03</div>
+                            <span class="inline-flex px-3 py-1 bg-accent/15 text-accent rounded-full text-xs font-bold">兼职 · 现任</span>
+                        </div>
+                        <div class="md:col-span-9">
+                            <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2">产品经理（兼职） · B 端 SaaS</h3>
+                            <p class="text-accent font-semibold mb-5">
+                                <i class="fas fa-building text-xs mr-2"></i>广州 xxx 公司
+                            </p>
+                            <ul class="space-y-2 text-bone/70 leading-relaxed">
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>承接 B 端 SaaS 后台模块的迭代规划，负责需求评审、PRD、上线验收全链路。</span></li>
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>在远程协作模式下，建立轻量需求池流程，让兼职状态也能稳定交付。</span></li>
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>推动重点客户定制化能力沉淀为通用功能，减少重复造轮子。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Job 2 -->
+                <article class="group bg-graphite border border-bone/10 rounded-3xl p-6 md:p-10 hover:bg-coal hover:border-accent/30 transition-all">
+                    <div class="grid md:grid-cols-12 gap-6 md:gap-10">
+                        <div class="md:col-span-3">
+                            <div class="text-bone/50 text-sm font-mono mb-2">2021.01 — 2024.06</div>
+                            <span class="inline-flex px-3 py-1 bg-bone/10 text-bone rounded-full text-xs font-bold">3.5 年 · 主力期</span>
+                        </div>
+                        <div class="md:col-span-9">
+                            <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2">产品经理 · B 端 SaaS · 智能硬件</h3>
+                            <p class="text-accent font-semibold mb-2">
+                                <i class="fas fa-building text-xs mr-2"></i>成都侠易科技有限公司
+                            </p>
+                            <p class="text-bone/50 text-sm mb-5">研发部 · 直接汇报：总经理</p>
+                            <ul class="space-y-2 text-bone/70 leading-relaxed">
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>主导多条 AI + 硬件产品线（人脸识别、边缘计算盒、智能防控系统）从 0 到 1 落地。</span></li>
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>协同算法、嵌入式、结构、销售四方资源，把"硬件 + 软件 + 服务"打包成可交付方案。</span></li>
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>建立产品需求 → 算法可行性 → 硬件 BOM → 上线节点的统一节奏，降低协同损耗。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Job 3 -->
+                <article class="group bg-graphite border border-bone/10 rounded-3xl p-6 md:p-10 hover:bg-coal hover:border-accent/30 transition-all">
+                    <div class="grid md:grid-cols-12 gap-6 md:gap-10">
+                        <div class="md:col-span-3">
+                            <div class="text-bone/50 text-sm font-mono mb-2">2019.09 — 2021.01</div>
+                            <span class="inline-flex px-3 py-1 bg-bone/10 text-bone rounded-full text-xs font-bold">起步期 · 1.5 年</span>
+                        </div>
+                        <div class="md:col-span-9">
+                            <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2">产品经理 · B 端 / C 端</h3>
+                            <p class="text-accent font-semibold mb-2">
+                                <i class="fas fa-building text-xs mr-2"></i>成都互联汇智科技有限公司
+                            </p>
+                            <p class="text-bone/50 text-sm mb-5">产品部 · 直接汇报：产品总监</p>
+                            <ul class="space-y-2 text-bone/70 leading-relaxed">
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>负责产品全生命周期管理：需求调研、原型、PRD、项目排期、数据复盘。</span></li>
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>同时跟 B 端管理后台 + C 端用户产品两条线，养成快速切场景的能力。</span></li>
+                                <li class="flex gap-3"><i class="fas fa-check text-accent mt-1.5 text-xs"></i><span>建立用户反馈闭环机制，让前线声音 48 小时内进到产品迭代池。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 md:py-32 px-6 lg:px-10 bg-cream">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 reveal">
+                <div>
+                    <div class="text-xs uppercase tracking-[0.3em] text-ink/50 mb-4 flex items-center gap-3">
+                        <span class="w-8 h-px bg-ink/40"></span>
+                        项目履历 · Selected Work
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1]">
+                        看看我做过的，<br>
+                        <span class="italic">不是 PPT。</span>
+                    </h2>
+                </div>
+                <a href="#contact" class="self-start md:self-end inline-flex items-center gap-2 px-5 py-3 bg-ink text-bone rounded-full text-sm font-semibold hover:bg-graphite transition-all">
+                    更多细节聊聊
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-6 gap-5">
+                <!-- Project 1: Hero -->
+                <article class="md:col-span-2 lg:col-span-4 bg-ink text-bone rounded-3xl overflow-hidden card-tilt group">
+                    <div class="grid md:grid-cols-2 h-full">
+                        <div class="aspect-[4/3] md:aspect-auto overflow-hidden">
+                            <img src="https://picsum.photos/800/600?random=21" alt="AI 智能客服" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="p-7 md:p-9 flex flex-col">
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="px-3 py-1 bg-accent text-ink rounded-full text-xs font-bold">主推</span>
+                                <span class="px-3 py-1 bg-bone/10 text-bone/80 rounded-full text-xs">AI 产品</span>
+                            </div>
+                            <h3 class="font-serif text-2xl md:text-3xl font-bold mb-3 leading-tight">AI 智能客服</h3>
+                            <p class="text-bone/70 leading-relaxed mb-6 line-clamp-3 flex-1">
+                                面向 B 端的 AI 客服系统：多渠道接入、意图识别、人机协作分流，把客服 SLA 从"看心情"做成"看数据"。
+                            </p>
+                            <div class="flex items-center justify-between pt-5 border-t border-bone/10">
+                                <div class="flex gap-4 text-xs text-bone/60">
+                                    <span><i class="fas fa-comments text-accent mr-1"></i>多渠道</span>
+                                    <span><i class="fas fa-robot text-accent mr-1"></i>NLP</span>
+                                </div>
+                                <a href="#" class="text-accent text-sm font-semibold hover:underline">查看 →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="md:col-span-1 lg:col-span-2 bg-accent text-ink rounded-3xl overflow-hidden card-tilt group flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden">
+                        <img src="https://picsum.photos/600/400?random=22" alt="AI 知产保护平台" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 md:p-7 flex-1 flex flex-col">
+                        <span class="self-start px-3 py-1 bg-ink text-accent rounded-full text-xs font-bold mb-3">AI 产品</span>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold mb-2 leading-tight">AI 知产保护平台</h3>
+                        <p class="text-ink/70 text-sm leading-relaxed mb-5 line-clamp-3 flex-1">基于 AI 的侵权检测与维权工作台，把企业法务从"被动取证"变成"主动监测"。</p>
+                        <a href="#" class="text-ink text-sm font-bold inline-flex items-center gap-1 hover:gap-2 transition-all">查看详情 <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="md:col-span-1 lg:col-span-2 bg-bone border border-ink/10 rounded-3xl overflow-hidden card-tilt group flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden">
+                        <img src="https://picsum.photos/600/400?random=23" alt="AI 人脸识别产品" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 md:p-7 flex-1 flex flex-col">
+                        <span class="self-start px-3 py-1 bg-coral/10 text-coral rounded-full text-xs font-bold mb-3">AI · 硬件</span>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold mb-2 leading-tight">AI 人脸识别产品</h3>
+                        <p class="text-ink/60 text-sm leading-relaxed mb-5 line-clamp-3 flex-1">面向门禁、考勤、园区安防的高精度人脸识别套件，软硬一体交付。</p>
+                        <a href="#" class="text-ink text-sm font-bold inline-flex items-center gap-1 hover:gap-2 transition-all">查看详情 <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="md:col-span-1 lg:col-span-2 bg-bone border border-ink/10 rounded-3xl overflow-hidden card-tilt group flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden">
+                        <img src="https://picsum.photos/600/400?random=24" alt="智能防控系统" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 md:p-7 flex-1 flex flex-col">
+                        <span class="self-start px-3 py-1 bg-ink/10 text-ink rounded-full text-xs font-bold mb-3">智能硬件</span>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold mb-2 leading-tight">智能防控系统</h3>
+                        <p class="text-ink/60 text-sm leading-relaxed mb-5 line-clamp-3 flex-1">综合安防管理平台：视频监控、报警联动、事件分析，一屏掌控。</p>
+                        <a href="#" class="text-ink text-sm font-bold inline-flex items-center gap-1 hover:gap-2 transition-all">查看详情 <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </article>
+
+                <!-- Project 5 -->
+                <article class="md:col-span-1 lg:col-span-2 bg-ink text-bone rounded-3xl overflow-hidden card-tilt group flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden">
+                        <img src="https://picsum.photos/600/400?random=25" alt="AI 边缘计算盒产品" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 md:p-7 flex-1 flex flex-col">
+                        <span class="self-start px-3 py-1 bg-accent/15 text-accent rounded-full text-xs font-bold mb-3">AI · 硬件</span>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold mb-2 leading-tight">AI 边缘计算盒</h3>
+                        <p class="text-bone/70 text-sm leading-relaxed mb-5 line-clamp-3 flex-1">本地推理 + 数据预处理一体化设备，把云上能力压到工地、门店、车间。</p>
+                        <a href="#" class="text-accent text-sm font-bold inline-flex items-center gap-1 hover:gap-2 transition-all">查看详情 <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </article>
+
+                <!-- Project 6 -->
+                <article class="md:col-span-2 lg:col-span-2 bg-coral/10 border border-coral/30 rounded-3xl overflow-hidden card-tilt group flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden">
+                        <img src="https://picsum.photos/600/400?random=26" alt="教育平台" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 md:p-7 flex-1 flex flex-col">
+                        <span class="self-start px-3 py-1 bg-coral text-bone rounded-full text-xs font-bold mb-3">SaaS · 教育</span>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold mb-2 leading-tight">教育在线平台</h3>
+                        <p class="text-ink/70 text-sm leading-relaxed mb-5 line-clamp-3 flex-1">课程管理、学习追踪、班级运营一站式 SaaS，服务 K12 与职教机构。</p>
+                        <a href="#" class="text-coral text-sm font-bold inline-flex items-center gap-1 hover:gap-2 transition-all">查看详情 <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Big Quote / Manifesto -->
+    <section class="py-20 md:py-32 px-6 lg:px-10 bg-bone">
+        <div class="max-w-5xl mx-auto text-center reveal">
+            <i class="fas fa-quote-left text-accent text-4xl md:text-5xl mb-8"></i>
+            <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.15] text-ink">
+                我不追"全功能"，<br>
+                我追<span class="marker italic">"用户离不开"</span>。<br>
+                这是 5 年里我反复回到的<br>
+                那一句产品观。
+            </p>
+            <div class="mt-10 flex items-center justify-center gap-3 text-ink/50 text-sm">
+                <span class="w-8 h-px bg-ink/30"></span>
+                阿鱼 · 2026
+                <span class="w-8 h-px bg-ink/30"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Capability cards -->
+    <section id="testimonials" class="py-20 md:py-28 px-6 lg:px-10 bg-ink text-bone relative overflow-hidden">
+        <div class="absolute inset-0 grid-bg opacity-40"></div>
+        <div class="relative max-w-7xl mx-auto">
+            <div class="text-center reveal mb-14">
+                <div class="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-bone/50 mb-4">
+                    <span class="w-8 h-px bg-bone/40"></span>
+                    协作姿态 · How I Work
+                    <span class="w-8 h-px bg-bone/40"></span>
+                </div>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold">和我合作是什么感觉？</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="bg-graphite border border-bone/10 rounded-3xl p-7 card-tilt">
+                    <div class="text-accent font-bold text-sm mb-4">— 来自前同事</div>
+                    <p class="text-bone/80 leading-relaxed mb-6">"她不会把会议开成宣讲会。每次评审都能快速定下哪个需求先做、哪个砍掉，让研发心里有底。"</p>
+                    <div class="flex items-center gap-3 pt-5 border-t border-bone/10">
+                        <img src="https://picsum.photos/100/100?random=31" alt="" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <div class="font-semibold">L. 工程师</div>
+                            <div class="text-bone/50 text-xs">前研发同事</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-accent text-ink rounded-3xl p-7 card-tilt">
+                    <div class="text-ink/60 font-bold text-sm mb-4">— 来自上级</div>
+                    <p class="text-ink/80 leading-relaxed mb-6">"她对数据敏感，每次复盘都能拿出具体到指标的判断，而不是模糊的'感觉变好了'。"</p>
+                    <div class="flex items-center gap-3 pt-5 border-t border-ink/15">
+                        <img src="https://picsum.photos/100/100?random=32" alt="" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <div class="font-semibold">W. 总监</div>
+                            <div class="text-ink/60 text-xs">前直属上级</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-graphite border border-bone/10 rounded-3xl p-7 card-tilt">
+                    <div class="text-coral font-bold text-sm mb-4">— 来自跨部门</div>
+                    <p class="text-bone/80 leading-relaxed mb-6">"和销售对客户案例时她不甩锅，会一起把需求改写成产品能落地的样子，再回到客户那边。"</p>
+                    <div class="flex items-center gap-3 pt-5 border-t border-bone/10">
+                        <img src="https://picsum.photos/100/100?random=33" alt="" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <div class="font-semibold">Z. 销售经理</div>
+                            <div class="text-bone/50 text-xs">前合作伙伴</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 md:py-28 px-6 lg:px-10 bg-cream">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14 reveal">
+                <div class="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-ink/50 mb-4">
+                    <span class="w-8 h-px bg-ink/40"></span>
+                    常见问题 · FAQ
+                    <span class="w-8 h-px bg-ink/40"></span>
+                </div>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold leading-tight">
+                    招聘官最关心的<br>
+                    <span class="italic">那几个问题。</span>
+                </h2>
+            </div>
+            <div class="space-y-3" id="faq">
+                <details class="group bg-bone border border-ink/10 rounded-2xl overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer px-6 py-5 list-none">
+                        <span class="font-semibold text-ink text-lg">擅长 B 端还是 C 端？</span>
+                        <i class="fas fa-plus text-ink/50 group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="px-6 pb-5 text-ink/70 leading-relaxed">
+                        都做过，重心在 B 端 SaaS 与 AI 产品。C 端经验来自第一份工作，养成了对用户体验的基本敏感。B 端经验集中在第二段，主导过多条 AI + 硬件产品线。
+                    </div>
+                </details>
+                <details class="group bg-bone border border-ink/10 rounded-2xl overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer px-6 py-5 list-none">
+                        <span class="font-semibold text-ink text-lg">最近为什么是兼职状态？</span>
+                        <i class="fas fa-plus text-ink/50 group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="px-6 pb-5 text-ink/70 leading-relaxed">
+                        第二段全职结束后短暂调整，期间以兼职方式在广州一家公司继续做 B 端 SaaS 项目，保持产品手感。目前正在寻找全职机会。
+                    </div>
+                </details>
+                <details class="group bg-bone border border-ink/10 rounded-2xl overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer px-6 py-5 list-none">
+                        <span class="font-semibold text-ink text-lg">是否接受出差 / 异地？</span>
+                        <i class="fas fa-plus text-ink/50 group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="px-6 pb-5 text-ink/70 leading-relaxed">
+                        广州、成都两地皆可。短期出差完全 OK，长期 base 优先广州 / 成都，远程也可以谈。
+                    </div>
+                </details>
+                <details class="group bg-bone border border-ink/10 rounded-2xl overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer px-6 py-5 list-none">
+                        <span class="font-semibold text-ink text-lg">最快什么时候可以到岗？</span>
+                        <i class="fas fa-plus text-ink/50 group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="px-6 pb-5 text-ink/70 leading-relaxed">
+                        当前为兼职状态，沟通确认后 1 - 2 周内可到岗。如有特殊节奏需求，可单独沟通。
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="py-24 md:py-32 px-6 lg:px-10 bg-ink text-bone relative overflow-hidden">
+        <div class="absolute inset-0 grid-bg opacity-30"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-bone/50 mb-6">
+                    <span class="w-8 h-px bg-accent"></span>
+                    联系方式 · Get in touch
+                    <span class="w-8 h-px bg-accent"></span>
+                </div>
+                <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] mb-8">
+                    一起做点<br>
+                    <span class="italic text-accent">真正有用</span>的东西？
+                </h2>
+                <p class="max-w-xl mx-auto text-bone/70 text-lg">
+                    如果你正在找一个能对结果负责、不甩锅、不画饼的产品经理，欢迎直接联系。下面是几条最快的路。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-5 mb-12">
+                <a href="tel:15680098153" class="group bg-graphite border border-bone/10 rounded-3xl p-7 card-tilt hover:bg-accent hover:text-ink hover:border-accent transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-accent group-hover:bg-ink text-ink group-hover:text-accent flex items-center justify-center mb-6 transition-colors">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="text-xs uppercase tracking-[0.2em] opacity-60 mb-2">电话</div>
+                    <div class="font-serif text-2xl font-bold mb-2">156-8009-8153</div>
+                    <div class="text-sm opacity-70 group-hover:opacity-90">点击直接拨号 →</div>
+                </a>
+                <a href="mailto:mhy15680098153@163.com" class="group bg-graphite border border-bone/10 rounded-3xl p-7 card-tilt hover:bg-accent hover:text-ink hover:border-accent transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-accent group-hover:bg-ink text-ink group-hover:text-accent flex items-center justify-center mb-6 transition-colors">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="text-xs uppercase tracking-[0.2em] opacity-60 mb-2">邮箱</div>
+                    <div class="font-serif text-xl font-bold mb-2 break-all">mhy15680098153@163.com</div>
+                    <div class="text-sm opacity-70 group-hover:opacity-90">写一封邮件 →</div>
+                </a>
+                <div class="bg-graphite border border-bone/10 rounded-3xl p-7">
+                    <div class="w-12 h-12 rounded-2xl bg-coral text-bone flex items-center justify-center mb-6">
+                        <i class="fas fa-location-dot"></i>
+                    </div>
+                    <div class="text-xs uppercase tracking-[0.2em] text-bone/60 mb-2">所在城市</div>
+                    <div class="font-serif text-2xl font-bold mb-2">广州 · 成都</div>
+                    <div class="text-sm text-bone/70">两地可选 / 远程可谈</div>
+                </div>
+            </div>
+
+            <!-- Social row -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pt-10 border-t border-bone/10">
+                <div class="flex items-center gap-4">
+                    <a href="#" aria-label="微信" class="w-11 h-11 rounded-full bg-bone/5 hover:bg-accent hover:text-ink flex items-center justify-center transition-colors">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" aria-label="微博" class="w-11 h-11 rounded-full bg-bone/5 hover:bg-accent hover:text-ink flex items-center justify-center transition-colors">
+                        <i class="fab fa-weibo"></i>
+                    </a>
+                    <a href="#" aria-label="知乎" class="w-11 h-11 rounded-full bg-bone/5 hover:bg-accent hover:text-ink flex items-center justify-center transition-colors">
+                        <i class="fab fa-zhihu"></i>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="w-11 h-11 rounded-full bg-bone/5 hover:bg-accent hover:text-ink flex items-center justify-center transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" aria-label="GitHub" class="w-11 h-11 rounded-full bg-bone/5 hover:bg-accent hover:text-ink flex items-center justify-center transition-colors">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <a href="mailto:mhy15680098153@163.com" class="inline-flex items-center justify-center gap-3 px-7 py-4 bg-accent text-ink rounded-full font-bold hover:bg-accentDeep transition-all">
+                    <i class="fas fa-paper-plane"></i>
+                    立刻发送简历邀约
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-coal text-bone/60 py-10 px-6 lg:px-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-accent text-ink flex items-center justify-center font-serif italic font-bold">阿</span>
+                <span class="text-sm">© 2026 阿鱼 · 求职中，期待与您合作</span>
+            </div>
+            <div class="text-xs text-bone/40">Crafted with care · 设计灵感 SiteJoy 风格 · 全站无任何 emoji</div>
+        </div>
+    </footer>
+
+    <!-- Floating contact button on mobile -->
+    <a href="#contact" class="md:hidden fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-accent text-ink shadow-2xl flex items-center justify-center" aria-label="联系我">
+        <i class="fas fa-paper-plane"></i>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // Smooth scroll & close menu
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const id = a.getAttribute('href');
+                if (id === '#' || id.length < 2) return;
+                const target = document.querySelector(id);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                navbar.classList.add('glass-light', 'shadow-sm');
+            } else {
+                navbar.classList.remove('glass-light', 'shadow-sm');
+            }
+        });
+
+        // Reveal on scroll
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(en => {
+                if (en.isIntersecting) {
+                    en.target.classList.add('in');
+                    io.unobserve(en.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+</body>
+</html>
